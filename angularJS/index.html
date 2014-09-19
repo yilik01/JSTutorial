@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>AngularJS Tutorial</title>
+		
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+	</head>
+	<body>	
+		<div class="container">			
+
+			<div class="row">
+				<h1>AngularJS Tutorial</h1>
+				<a href="http://www.w3schools.com/angular/default.asp" target="_blank">http://www.w3schools.com/angular/default.asp</a>
+				<hr />
+			 	<ul class="nav nav-tabs" id="myTab">
+				  <li class="active"><a href="#expressions" role="tab" data-toggle="tab">1. Expressions</a></li>
+				  <li><a href="#directives" role="tab" data-toggle="tab">2. Directives</a></li>
+				  <li><a href="#controllers" role="tab" data-toggle="tab">3. Controllers</a></li>
+				  <li><a href="#filters" role="tab" data-toggle="tab">4. Filters</a></li>
+				  <li><a href="#htmldom" role="tab" data-toggle="tab">5. HTML DOM</a></li>
+				  <li><a href="#events" role="tab" data-toggle="tab">6. Events</a></li>
+				  <li><a href="#modules" role="tab" data-toggle="tab">7. Modules</a></li>
+				  <li><a href="#application" role="tab" data-toggle="tab">8. Application</a></li>
+				</ul>		 				
+		 	</div>		 	
+
+			<div class="tab-content">
+
+				<!-- Application Tab -->
+				<div class="tab-pane" id="application">
+					<div class="row" ng-controller="myNoteCtrl">
+						<h2>My Note</h2>					
+						<p><textarea ng-model="message" cols="40" rows="10"></textarea></p>					
+						<p>
+						<button ng_click="save()">Save</button>
+						<button ng-click="clear()">Clear</button>
+						</p>					
+						<p>Number of characters left: <span ng-bind="left()"></span></p>
+					</div>
+				</div>
+				
+				
+				<!-- Modules Tab -->
+				<div class="tab-pane" id="modules">
+			 		<div class="row" ng-controller="myCtrl">
+						{{ firstName + " " + lastName }}
+					</div>										
+				</div>
+								
+				<!-- Events Tab -->
+				<div class="tab-pane" id="events">
+			 		<div class="row" ng-controller="myController">
+						<button ng-click="count = count + 1">Click me!</button>
+						<p>{{ count }}</p>
+					</div>
+					<div class="row" ng-controller="personController">
+						<button ng-click="toggle()">Toggle</button>
+						<p ng-show="myVar">
+						First Name: <input type="text" ng-model="person.firstName"><br>
+						Last Name: <input type="text" ng-model="person.lastName"><br>
+						<br>
+						Full Name: {{person.firstName + " " + person.lastName}}
+						</p>
+					</div>										
+				</div>
+								
+				<!-- HTML DOM Tab -->
+				<div class="tab-pane" id="htmldom">
+			 		<div class="row" ng-init="mySwitch=true">	 
+						<h4>The ng-disabled Directive</h4>
+						<p><button ng-disabled="mySwitch">Click Me!</button></p>
+						<p><input type="checkbox" ng-model="mySwitch">Button</p>
+						<p>{{ mySwitch }}</p>
+				 	</div>
+		 			<div class="row" ng-init="mySwitch=true">	 
+						<h4>The ng-show Directive</h4>
+						<p ng-show="true">I am visible.</p>
+						<p ng-show="false">I am not visible.</p>
+				 	</div>				 	
+				</div>
+				 
+				<!-- Filters Tab -->
+				<div class="tab-pane" id="filters">
+			 		<div class="row" ng-controller="personController">	 
+						<h4>Adding Filters to Expressions</h4>
+						<div ng-controller="personController">
+							<p>The name is {{ person.lastName | uppercase }}</p>
+							<p>The name is {{ person.lastName | lowercase }}</p>
+						</div>								 
+				 	</div>
+			 		<div class="row" ng-controller="costController">	 
+						<h4>The currency Filter</h4>
+						<div ng-controller="personController">
+							Quantity: <input type="number" ng-model="quantity">
+							Price: <input type="number" ng-model="price">
+							<p>Total = {{ (quantity * price) | currency }}</p>
+						</div>								 
+				 	</div>
+			 		<div class="row" ng-controller="namesController">	 
+						<h4>Adding Filters to Directives</h4>
+						<ul>
+						  <li ng-repeat="x in names | orderBy:'country'">
+						    {{ x.name + ', ' + x.country }}
+						  </li>
+						</ul>		 
+				 	</div>
+				 	<div class="row" ng-controller="namesController">	 
+						<h4>Filtering Input</h4>
+						<p><input type="text" ng-model="name"></p>
+						<ul>
+						  <li ng-repeat="x in names | filter:name | orderBy:'country'">
+						    {{ (x.name | uppercase) + ', ' + x.country }}
+						  </li>
+						</ul>								 
+				 	</div>
+				</div>
+				
+				<!-- Controllers Tab -->
+				<div class="tab-pane" id="controllers">
+					<div class="row" ng-controller="personController">	 
+						First Name: <input type="text" ng-model="person.firstName"><br>
+						Last Name: <input type="text" ng-model="person.lastName"><br>
+						<br>
+						Full Name: {{person.firstName + " " + person.lastName}}	
+				 	</div>			 
+					<div class="row" ng-controller="personController">	 
+						<h4>Controller Properties</h4> 
+						First Name: <input type="text" ng-model="person.firstName"><br>
+						Last Name: <input type="text" ng-model="person.lastName"><br>
+						<br>
+						Full Name: {{person.fullName()}}
+				 	</div>					
+					<div class="row" ng-controller="personController">	 
+						<h4>Controller Methods</h4> 
+						First Name: <input type="text" ng-model="person.firstName"><br>
+						Last Name: <input type="text" ng-model="person.lastName"><br>
+						<br>
+						Full Name: {{fullName()}}
+				 	</div>
+					<div class="row" ng-controller="namesController">
+						<h4>Another Example</h4> 
+						<ul>
+						  <li ng-repeat="x in names">
+						    {{ x.name + ', ' + x.country }}
+						  </li>
+						</ul>
+					</div>			 	
+				</div>
+				
+				<!-- Directives Tab -->
+				<div class="tab-pane" id="directives">
+				 	<div class="row">	 
+						<h4>Data Binding</h4> 
+						Quantity: <input type="number"	ng-model="quantity">
+						Costs:    <input type="number" ng-model="price">
+						Total in dollar: {{ quantity * price }}		
+				 	</div>
+					<div class="row" ng-init="names=['Jani','Hege','Kai']">	 
+						<h4>Repeating HTML Elements</h4> 
+						<ul>
+							<li ng-repeat="x in names">
+						    	{{ x }}
+						    </li>
+						</ul>	
+				 	</div>				 	
+				 	<div class="row" ng-init="names1=[{name:'Jani',country:'Norway'},{name:'Hege',country:'Sweden'},{name:'Kai',country:'Denmark'}]">
+				 		<ul>
+						  <li ng-repeat="x in names1">
+						    {{ x.name + ', ' + x.country }}
+						  </li>
+						</ul>			 	
+				 	</div>
+				</div>
+					
+				<!-- Expressions Tab -->
+				<div class="tab-pane active" id="expressions">
+					<div class="row">	 
+					 	<p>Name: <input type="text" ng-model="name"></p>
+						<p>The name is <span ng-bind="name"></span></p>
+						<p>My first expression: {{ 5 + 5 }}</p>
+				 	</div>
+					<div class="row" ng-init="quantity=1; cost=5;">	 
+						<h4>AngularJS Numbers</h4> 
+						<p>Total in dollar: {{ quantity * cost }}</p>
+						<p>Total in dollar: <span ng-bind="quantity * cost"></span></p>
+				 	</div>
+					<div class="row" ng-init="firstName='John'; lastName='Doe'">	 
+						<h4>AngularJS Strings</h4> 
+						<p>The name is {{ firstName + " " + lastName }}</p>
+						<p>The name is <span ng-bind="firstName + ' ' + lastName"></span></p>
+				 	</div>
+					<div class="row" ng-init="person={firstName:'John',lastName:'Doe'}">	 
+						<h4>AngularJS Objects</h4> 
+						<p>The name is {{ person.lastName }}</p>
+						<p>The name is <span ng-bind="person.lastName"></span></p>
+				 	</div>
+					<div class="row" ng-init="points=[1,15,19,2,40]">	 
+						<h4>AngularJS Arrays</h4> 
+						<p>The points are {{ points[2] }}</p>
+						<p>The points are <span ng-bind="points[2]"></span></p>
+				 	</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- AngularJS Scripts -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/controller.js"></script>
+		<script type="text/javascript" src="js/tutorial.js"></script>
+		
+		<!-- If myapp = "" -->
+<!-- 		<script type="text/javascript" src="js/controller_v1.js"></script> -->
+		
+	</body>
+</html>
