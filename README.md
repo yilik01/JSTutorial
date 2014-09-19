@@ -1,2 +1,4 @@
-Demo
-====
+JSTutorial
+==========
+
+JavaScript Tutorial Repository!!!  
